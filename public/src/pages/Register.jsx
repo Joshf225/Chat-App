@@ -23,6 +23,13 @@ function Register() {
     draggable: true,
     theme: "dark",
   };
+
+  useEffect(() => {
+    //checking if users already logged in, by looking at localStorage, this is to stop users goinf to register page when already logged in
+    if (localStorage.getItem("chat-app-user")) {
+      navigate("/");
+    }
+  }, []);
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (handleValidation()) {
