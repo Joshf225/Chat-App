@@ -34,21 +34,37 @@ module.exports.register = async (req, res, next) => {
 module.exports.login = async (req, res, next) => {
   try {
     //this is to post registration details(details to post in req)
-    // console.log(req.body)
+    console.log(req.body);
     const { username, password } = req.body;
     //checking if each data object is already used
-    const usern = await User.findOne({ username });
-    if (!usern)
+    const user = await User.findOne({ username });
+    if (!user)
       return res.json({ msg: "Incorrect username or password", status: false });
     //comparing the passwords sent from the frontend with the password in database
-    const isPasswordValid = await bcrypt.compare(password, usern.password);
+    const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid)
       return res.json({ msg: "Incorrect username or password", status: false });
-    delete usern.password;
+    delete user.password;
 
     //returning true back to user from the database assuming everything was correct when registering
-    return res.json({ status: true, usern });
+    return res.json({ status: true, user });
   } catch (err) {
+    next(err);
+  }
+};
+module.exports.setAvatar = async (req, res, next) => {
+  try {
+    const userId = req.params.id;
+    const avatarImage = req.body.image;
+    const userData = await User.findByIdAndUpdate(userId, {
+      isAvatarImageSet: true,
+      avatarImage,
+    });
+    return res.json({
+      isSet: userData.isAvatarImageSet,
+      image: userData.avatarImage,
+    });
+  } catch (error) {
     next(err);
   }
 };
