@@ -68,3 +68,18 @@ module.exports.setAvatar = async (req, res, next) => {
     next(err);
   }
 };
+
+module.exports.getAllUsers = async (req, res, next) => {
+  try {
+    //select all users not including the current user
+    const users = await User.find({ _id: { $ne: req.params.id } }).select([
+      "email",
+      "username",
+      "avtarImage",
+      "_id",
+    ]);
+    return res.json(users);
+  } catch (error) {
+    next(error);
+  }
+};
