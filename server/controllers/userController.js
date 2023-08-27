@@ -34,7 +34,6 @@ module.exports.register = async (req, res, next) => {
 module.exports.login = async (req, res, next) => {
   try {
     //this is to post registration details(details to post in req)
-    console.log(req.body);
     const { username, password } = req.body;
     //checking if each data object is already used
     const user = await User.findOne({ username });
@@ -75,7 +74,7 @@ module.exports.getAllUsers = async (req, res, next) => {
     const users = await User.find({ _id: { $ne: req.params.id } }).select([
       "email",
       "username",
-      "avtarImage",
+      "avatarImage",
       "_id",
     ]);
     return res.json(users);

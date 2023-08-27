@@ -37,7 +37,6 @@ export default function SetAvatar() {
       const { data } = await axios.post(`${setAvatarRoute}/${user._id}`, {
         image: avatars[selectedAvatar],
       });
-      console.log(data);
       if (data.isSet) {
         //checking if user has selected a profile picture and navigating them to home page
         user.isAvatarImageSet = true;
