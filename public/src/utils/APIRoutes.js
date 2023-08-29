@@ -1,4 +1,4 @@
-export const host = "https://jf-chat-app.netlify.app";
+export const host = "https://chat-app-b0s7.onrender.com";
 export const registerRoute = `${host}/api/auth/register`;
 export const loginRoute = `${host}/api/auth/login`;
 export const setAvatarRoute = `${host}/api/auth/setAvatar`;

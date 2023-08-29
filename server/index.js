@@ -35,7 +35,7 @@ const server = app.listen(3000, () => {
 
 const io = socket(server, {
   cors: {
-    origin: "https://jf-chat-app.netlify.app",
+    origin: "https://chat-app-b0s7.onrender.com",
     credetentials: true,
   },
 });
