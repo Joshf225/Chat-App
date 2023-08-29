@@ -6,7 +6,8 @@ const userRoutes = require("./routes/userRoutes");
 const messageRoute = require("./routes/messagesRoute");
 const socket = require("socket.io");
 
-const dbURI = process.env.MONGO_URL;
+const dbURI =
+  "mongodb+srv://joshua-admin:kDq8AF76FskePsJK@cluster0.dyjxcvr.mongodb.net/?retryWrites=true&w=majority";
 
 const app = express();
 require("dotenv").config();
@@ -35,7 +36,7 @@ const server = app.listen(3000, () => {
 
 const io = socket(server, {
   cors: {
-    origin: "https://joshf225.github.io",
+    origin: "https://localhost:5000",
     credetentials: true,
   },
 });
