@@ -7,6 +7,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { loginRoute } from "../utils/APIRoutes";
+require("dotenv").config();
 
 function Login() {
   const navigate = useNavigate();
@@ -25,7 +26,7 @@ function Login() {
 
   useEffect(() => {
     //checking if users already logged in, by looking at localStorage, this is to stop users goinf to login page when already logged in
-    if (localStorage.getItem("chat-app-user")) {
+    if (localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)) {
       navigate("/");
     }
   }, []);
@@ -44,7 +45,10 @@ function Login() {
       }
       if (data.status === true) {
         //passing the users data to local Storage,if everything is correct put users data in local storage and navigate to chat container
-        localStorage.setItem("chat-app-user", JSON.stringify(data.user));
+        localStorage.setItem(
+          process.env.REACT_APP_LOCALHOST_KEY,
+          JSON.stringify(data.user)
+        );
         navigate("/");
       }
     }
@@ -73,7 +77,7 @@ function Login() {
         <form onSubmit={handleSubmit}>
           <div className="brand">
             <img src={Logo} alt="Logo" />
-            <h1>snappy</h1>
+            <h1>Chatty!</h1>
           </div>
           <input
             type="text"
@@ -90,7 +94,7 @@ function Login() {
           />
           <button type="submit">Login In</button>
           <span>
-            Don't have an account? <Link to="/register">Register</Link>
+            Don't have an account? <Link to="/register">Create One</Link>
           </span>
         </form>
       </FormContainer>

@@ -3,6 +3,7 @@ const {
   login,
   setAvatar,
   getAllUsers,
+  logOut,
 } = require("../controllers/userController");
 
 const router = require("express").Router();
@@ -13,5 +14,6 @@ router.post("/login", login);
 router.post("/setAvatar/:id", setAvatar);
 //getting data from server
 router.get("/allusers/:id", getAllUsers);
+router.get("/logout/:id", logOut);
 
 module.exports = router;

@@ -6,7 +6,8 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { setAvatarRoute } from "../utils/APIRoutes";
-const Buffer = require("buffer/").Buffer; // note: the trailing slash is important!
+const Buffer = require("buffer/").Buffer;
+require("dotenv").config();
 
 export default function SetAvatar() {
   //a free open source api for avatars
@@ -24,7 +25,7 @@ export default function SetAvatar() {
   };
 
   useEffect(() => {
-    if (!localStorage.getItem("chat-app-user")) {
+    if (!localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)) {
       navigate("/login");
     }
   }, []);
@@ -33,7 +34,9 @@ export default function SetAvatar() {
     if (selectedAvatar === undefined) {
       toast.error("Please select an avatar", toastOptions);
     } else {
-      const user = await JSON.parse(localStorage.getItem("chat-app-user"));
+      const user = await JSON.parse(
+        localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
+      );
       const { data } = await axios.post(`${setAvatarRoute}/${user._id}`, {
         image: avatars[selectedAvatar],
       });
@@ -41,7 +44,10 @@ export default function SetAvatar() {
         //checking if user has selected a profile picture and navigating them to home page
         user.isAvatarImageSet = true;
         user.avatarImage = data.image;
-        localStorage.setItem("chat-app-user", JSON.stringify(user));
+        localStorage.setItem(
+          process.env.REACT_APP_LOCALHOST_KEY,
+          JSON.stringify(user)
+        );
         navigate("/");
       } else {
         toast.error("Error setting avatar. Please try again", toastOptions);

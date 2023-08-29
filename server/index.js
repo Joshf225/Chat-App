@@ -1,9 +1,12 @@
+require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const userRoutes = require("./routes/userRoutes");
 const messageRoute = require("./routes/messagesRoute");
 const socket = require("socket.io");
+
+const dbURI = process.env.MONGO_URL;
 
 const app = express();
 require("dotenv").config();
@@ -15,7 +18,7 @@ app.use("/api/auth", userRoutes);
 app.use("/api/messages", messageRoute);
 
 mongoose
-  .connect(process.env.MONGO_URL, {
+  .connect(dbURI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
@@ -26,13 +29,13 @@ mongoose
     console.log(err.message);
   });
 
-const server = app.listen(process.env.PORT, () => {
-  console.log(`SERVER STARTED ON PORT ${process.env.PORT}`);
+const server = app.listen(3000, () => {
+  console.log("SERVER STARTED ON 3000");
 });
 
 const io = socket(server, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: "https://joshf225.github.io",
     credetentials: true,
   },
 });

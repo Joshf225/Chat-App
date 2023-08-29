@@ -7,6 +7,7 @@ import Contacts from "../components/Contacts";
 import Welcome from "../components/Welcome";
 import ChatContainer from "../components/ChatContainer";
 import { io } from "socket.io-client";
+require("dotenv").config();
 
 function Chat() {
   const socket = useRef();
@@ -17,10 +18,14 @@ function Chat() {
   const [isLoaded, setIsLoaded] = useState(false);
   useEffect(() => {
     async function checkForUser() {
-      if (!localStorage.getItem("chat-app-user")) {
+      if (!localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)) {
         navigate("/login");
       } else {
-        setCurrentUser(await JSON.parse(localStorage.getItem("chat-app-user")));
+        setCurrentUser(
+          await JSON.parse(
+            localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
+          )
+        );
         setIsLoaded(true);
       }
     }
@@ -58,19 +63,11 @@ function Chat() {
   return (
     <Container>
       <div className="container">
-        <Contacts
-          contacts={contacts}
-          currentUser={currentUser}
-          changeChat={handleChatChange}
-        />
-        {isLoaded && currentChat === undefined ? (
-          <Welcome currentUser={currentUser} />
+        <Contacts contacts={contacts} changeChat={handleChatChange} />
+        {currentChat === undefined ? (
+          <Welcome />
         ) : (
-          <ChatContainer
-            currentChat={isLoaded && currentChat}
-            currentUser={currentUser}
-            socket={socket}
-          />
+          <ChatContainer currentChat={currentChat} socket={socket} />
         )}
       </div>
     </Container>

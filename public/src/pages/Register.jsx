@@ -6,6 +6,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { registerRoute } from "../utils/APIRoutes";
+require("dotenv").config();
 
 function Register() {
   const navigate = useNavigate();
@@ -26,7 +27,7 @@ function Register() {
 
   useEffect(() => {
     //checking if users already logged in, by looking at localStorage, this is to stop users goinf to register page when already logged in
-    if (localStorage.getItem("chat-app-user")) {
+    if (localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)) {
       navigate("/");
     }
   }, []);
@@ -46,7 +47,10 @@ function Register() {
       }
       if (data.status === true) {
         //passing the users data to local Storage,if everything is correct put users data in local storage and navigate to chat container
-        localStorage.setItem("chat-app-user", JSON.stringify(data.user));
+        localStorage.setItem(
+          process.env.REACT_APP_LOCALHOST_KEY,
+          JSON.stringify(data.user)
+        );
         navigate("/");
       }
     }
