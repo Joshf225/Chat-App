@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Robot from "../assets/robot.gif";
 
 export default function Welcome() {
+  //hi
   const [userName, setUserName] = useState("");
   useEffect(async () => {
     setUserName(
