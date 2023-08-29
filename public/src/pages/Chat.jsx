@@ -62,11 +62,19 @@ function Chat() {
   return (
     <Container>
       <div className="container">
-        <Contacts contacts={contacts} changeChat={handleChatChange} />
+        <Contacts
+          contacts={contacts}
+          changeChat={handleChatChange}
+          currentUser={currentUser}
+        />
         {currentChat === undefined ? (
           <Welcome />
         ) : (
-          <ChatContainer currentChat={currentChat} socket={socket} />
+          <ChatContainer
+            currentChat={currentChat}
+            currentUser={currentUser}
+            socket={socket}
+          />
         )}
       </div>
     </Container>

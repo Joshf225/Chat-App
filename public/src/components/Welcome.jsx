@@ -2,24 +2,12 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Robot from "../assets/robot.gif";
 
-export default function Welcome() {
-  //hi
-  const [userName, setUserName] = useState("");
-  useEffect(() => {
-    const addUsername = async () => {
-      setUserName(
-        await JSON.parse(
-          localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
-        ).username
-      );
-    };
-    addUsername();
-  }, []);
+export default function Welcome({ currentUser }) {
   return (
     <Container>
       <img src={Robot} alt="Robot" />
       <h1>
-        Welcome, <span>{userName}!</span>
+        Welcome, <span>{currentUser.username}!</span>
       </h1>
       <h3 color="white">Please select a chat to start messaging</h3>
     </Container>
