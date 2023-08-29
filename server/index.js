@@ -6,8 +6,7 @@ const userRoutes = require("./routes/userRoutes");
 const messageRoute = require("./routes/messagesRoute");
 const socket = require("socket.io");
 
-const dbURI =
-  "mongodb+srv://joshua-admin:kDq8AF76FskePsJK@cluster0.dyjxcvr.mongodb.net/?retryWrites=true&w=majority";
+const dbURI = process.env.MONGO_URL;
 
 const app = express();
 require("dotenv").config();
@@ -30,31 +29,31 @@ mongoose
     console.log(err.message);
   });
 
-// const server = app.listen(3000, () => {
-//   console.log("SERVER STARTED ON 3000");
-// });
+const server = app.listen(3000, () => {
+  console.log("SERVER STARTED ON 3000");
+});
 
-// const io = socket(server, {
-//   cors: {
-//     origin: "https://localhost:5000",
-//     credetentials: true,
-//   },
-// });
+const io = socket(server, {
+  cors: {
+    origin: process.env.BASE_URL,
+    credetentials: true,
+  },
+});
 
-// global.onlineUsers = new Map();
+global.onlineUsers = new Map();
 
-// io.on("connection", (socket) => {
-//   global.chatSocket = socket;
-//   //setting userId and socket id to global map
-//   socket.on("add-user", (userId) => {
-//     onlineUsers.set(userId, socket.id);
-//   });
+io.on("connection", (socket) => {
+  global.chatSocket = socket;
+  //setting userId and socket id to global map
+  socket.on("add-user", (userId) => {
+    onlineUsers.set(userId, socket.id);
+  });
 
-//   socket.on("send-msg", (data) => {
-//     const sendUserSocket = onlineUsers.get(data.to);
-//     //checking if msg sending to a user is online then emitting msg to user and storing msg in database,if not its stored into database
-//     if (sendUserSocket) {
-//       socket.to(sendUserSocket).emit("msg-recieve", data.message);
-//     }
-//   });
-// });
+  socket.on("send-msg", (data) => {
+    const sendUserSocket = onlineUsers.get(data.to);
+    //checking if msg sending to a user is online then emitting msg to user and storing msg in database,if not its stored into database
+    if (sendUserSocket) {
+      socket.to(sendUserSocket).emit("msg-recieve", data.message);
+    }
+  });
+});
