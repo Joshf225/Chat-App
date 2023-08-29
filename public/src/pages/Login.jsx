@@ -25,7 +25,7 @@ function Login() {
 
   useEffect(() => {
     //checking if users already logged in, by looking at localStorage, this is to stop users goinf to login page when already logged in
-    if (localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)) {
+    if (localStorage.getItem("chat-app-current-user")) {
       navigate("/");
     }
   }, []);
@@ -45,7 +45,7 @@ function Login() {
       if (data.status === true) {
         //passing the users data to local Storage,if everything is correct put users data in local storage and navigate to chat container
         localStorage.setItem(
-          process.env.REACT_APP_LOCALHOST_KEY,
+          "chat-app-current-user",
           JSON.stringify(data.user)
         );
         navigate("/");
@@ -76,7 +76,7 @@ function Login() {
         <form onSubmit={handleSubmit}>
           <div className="brand">
             <img src={Logo} alt="Logo" />
-            <h1>Chatty!</h1>
+            <h1>snappy</h1>
           </div>
           <input
             type="text"
@@ -93,7 +93,7 @@ function Login() {
           />
           <button type="submit">Login In</button>
           <span>
-            Don't have an account? <Link to="/register">Create One</Link>
+            Don't have an account? <Link to="/register">Register</Link>
           </span>
         </form>
       </FormContainer>

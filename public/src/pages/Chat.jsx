@@ -17,13 +17,11 @@ function Chat() {
   const [isLoaded, setIsLoaded] = useState(false);
   useEffect(() => {
     async function checkForUser() {
-      if (!localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)) {
+      if (!localStorage.getItem("chat-app-current-user")) {
         navigate("/login");
       } else {
         setCurrentUser(
-          await JSON.parse(
-            localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
-          )
+          await JSON.parse(localStorage.getItem("chat-app-current-user"))
         );
         setIsLoaded(true);
       }
@@ -64,14 +62,14 @@ function Chat() {
       <div className="container">
         <Contacts
           contacts={contacts}
-          changeChat={handleChatChange}
           currentUser={currentUser}
+          changeChat={handleChatChange}
         />
-        {currentChat === undefined ? (
-          <Welcome />
+        {isLoaded && currentChat === undefined ? (
+          <Welcome currentUser={currentUser} />
         ) : (
           <ChatContainer
-            currentChat={currentChat}
+            currentChat={isLoaded && currentChat}
             currentUser={currentUser}
             socket={socket}
           />

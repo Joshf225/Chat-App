@@ -26,7 +26,7 @@ function Register() {
 
   useEffect(() => {
     //checking if users already logged in, by looking at localStorage, this is to stop users goinf to register page when already logged in
-    if (localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)) {
+    if (localStorage.getItem("chat-app-current-user")) {
       navigate("/");
     }
   }, []);
@@ -47,7 +47,7 @@ function Register() {
       if (data.status === true) {
         //passing the users data to local Storage,if everything is correct put users data in local storage and navigate to chat container
         localStorage.setItem(
-          process.env.REACT_APP_LOCALHOST_KEY,
+          "chat-app-current-user",
           JSON.stringify(data.user)
         );
         navigate("/");
