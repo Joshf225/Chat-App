@@ -7,7 +7,6 @@ import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { setAvatarRoute } from "../utils/APIRoutes";
 const Buffer = require("buffer/").Buffer;
-require("dotenv").config();
 
 export default function SetAvatar() {
   //a free open source api for avatars

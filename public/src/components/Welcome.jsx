@@ -5,12 +5,15 @@ import Robot from "../assets/robot.gif";
 export default function Welcome() {
   //hi
   const [userName, setUserName] = useState("");
-  useEffect(async () => {
-    setUserName(
-      await JSON.parse(
-        localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
-      ).username
-    );
+  useEffect(() => {
+    const addUsername = async () => {
+      setUserName(
+        await JSON.parse(
+          localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
+        ).username
+      );
+    };
+    addUsername();
   }, []);
   return (
     <Container>

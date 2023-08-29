@@ -7,7 +7,6 @@ import Contacts from "../components/Contacts";
 import Welcome from "../components/Welcome";
 import ChatContainer from "../components/ChatContainer";
 import { io } from "socket.io-client";
-require("dotenv").config();
 
 function Chat() {
   const socket = useRef();
