@@ -1,0 +1,45 @@
+# Snappy - Real-Time Chat Application
+
+![login page](./images/snappy_login.png)
+
+![home page](./images/snappy.png)
+
+Snappy is chat application build with the power of MERN Stack. It's live here -> [here](https://flourishing-concha-c459d5.netlify.app/)
+
+## Tech stack
+
+### Backend
+
+- Node
+- Express
+- MongoDB Atlas
+- Mongoose
+- Bcrypt
+- Socket.io
+- Socket.io-client
+- Axios
+
+### Frontend
+
+- REACT
+- HTML
+- CSS
+- JS
+- styled-components
+- emoji-picker-react
+- react-toastify
+
+### API's used
+
+- api.multiavatar.com
+
+### Concepts learned from this bootcamp:
+
+- React
+- styled-components
+- socket.io
+- Toastify
+- Custom authentication
+- Axios
+
+#### **Made by Joshua Famose with guidance from Kishan Sheth [from](https://flourishing-concha-c459d5.netlify.app/)**
