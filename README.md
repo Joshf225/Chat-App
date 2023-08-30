@@ -43,3 +43,5 @@ Snappy is chat application build with the power of MERN Stack. It's live here ->
 - Axios
 
 #### **Made by Joshua Famose with guidance from Kishan Sheth [from](https://www.youtube.com/@KishanSheth21)**
+
+####**Note**, the site might lag and take while when you create an account or login for the first time , server response for the backend isn't the fastest. Thanks.
