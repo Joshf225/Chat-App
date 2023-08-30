@@ -35,7 +35,8 @@ const server = app.listen(3000, () => {
 
 const io = socket(server, {
   cors: {
-    origin: "https://chat-app-b0s7.onrender.com",
+    origin: "*",
+    methods: ["GET", "POST"],
     credetentials: true,
   },
 });
