@@ -1,6 +1,6 @@
 # Snappy - Real-Time Chat Application
 
-Snappy is chat application build with the power of MERN Stack. It's live here -> [here](https://flourishing-concha-c459d5.netlify.app/)
+Snappy is chat application build with the power of MERN Stack. It's live here -> [here](https://flourishing-concha-c459d5.netlify.app/) <br/>
 ##If you don't want to create an account;
 **username:** **admin,**
 **password:** **password.**
